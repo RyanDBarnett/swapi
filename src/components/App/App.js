@@ -28,7 +28,7 @@ class App extends Component {
     });
     const promise = Promise.all(unresolvedPromises);
     let result = promise.then(data => { 
-      data[0].results.map(person => {
+      return data[0].results.map(person => {
         const {homeworld, name, species} = person;
         const newPerson = {name}
 
@@ -39,9 +39,15 @@ class App extends Component {
           newPerson.homeworldPopulation = planet.population;
         });
 
-        console.log(newPerson)
+        fetch(species)
+        .then(response => response.json())
+        .then(species => {
+          newPerson.species = species.name
+        });
+        return newPerson;
       });
     });
+    console.log(result);
   }
 
   render = () => {
