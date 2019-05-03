@@ -48,8 +48,8 @@ class App extends Component {
   createNewPerson(person) {
     const {homeworld, name, species} = person;
     const newPerson = {name};
-    const unresolvedPromises = [getHomeworld(homeworld), getSpecies(species)];
-    Promise.all(unresolvedPromises).then(results => {
+    const pendingPromises = [getHomeworld(homeworld), getSpecies(species)];
+    Promise.all(pendingPromises).then(results => {
       newPerson.homeworld = results[0].name;
       newPerson.homeworldPopulation = results[0].population;
       newPerson.species = results[1].name;
