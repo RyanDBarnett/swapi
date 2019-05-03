@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from '../Header/Header';
 import Buttons from '../Buttons/Buttons';
+import { getSpecies, getHomeworld, getCategories, getFilms } from '../../apiCalls/apiCalls.js';
 
 class App extends Component {
   constructor() {
@@ -10,55 +11,50 @@ class App extends Component {
     this.state = {
       loaded: false,
       films: [],
+      people: [],
       error: ''
     };
   }
 
   componentDidMount = () => {
-    const url = 'https://swapi.co/api/films';
-    fetch(url)
-      .then(response => response.json())
-      .then(data => data.results)
-      .then(films => this.setState({ films, loaded: true }))
-      .catch(error => this.setState({ error: error, loaded: true }))
-
-    const categoryUrls = ['https://swapi.co/api/people']
-    const unresolvedPromises = categoryUrls.map(url => {
-      return fetch(url).then(response => response.json());
-    });
-    const promise = Promise.all(unresolvedPromises);
-    let result = promise.then(data => { 
-      return data[0].results.map(person => {
+    getFilms()
+    .then(films => this.setState({ films, loaded: true }))
+    .catch(error => this.setState({ error: error, loaded: true }))
+    let result = getCategories().then(promises => { 
+      return promises[0].results.map(person => {
         const {homeworld, name, species} = person;
         const newPerson = {name}
 
-        fetch(homeworld)
-        .then(response => response.json())
+        getHomeworld(homeworld)
         .then(planet => {
           newPerson.homeworld = planet.name;
           newPerson.homeworldPopulation = planet.population;
         });
 
-        fetch(species)
-        .then(response => response.json())
+        getSpecies(species)
         .then(species => {
           newPerson.species = species.name
         });
         return newPerson;
       });
     });
-    console.log(result);
+    result.then(people => this.setState({ people }));
   }
 
   render = () => {
     const {loaded, films, error} = this.state;
-    const startingDisplay = loaded && !error ?
-      <div>
-        <h2>{films[0].title}</h2>
-        <h3>{films[0].opening_crawl}</h3>
-        <p>{films[0].release_date}</p>
-      </div>
-      : <h3>{error}</h3>;
+    let startingDisplay = 'Loading...';
+    if(loaded) {
+      const randomFilm = films[Math.floor(Math.random() * films.length)];
+      const {title, opening_crawl, release_date} = randomFilm;
+      startingDisplay = !error ?
+        <div>
+          <h2>{title}</h2>
+          <h3>{opening_crawl}</h3>
+          <p>{release_date}</p>
+        </div>
+        : <h3>{error}</h3>;
+    }
 
     return (
       <div className="App">
