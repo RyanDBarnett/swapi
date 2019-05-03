@@ -5,7 +5,7 @@ export const getHomeworld = (url) => {
     } else {
       return response.json();
     }
-  });
+  })
 }
 
 export const getSpecies = (url) => {
@@ -15,12 +15,14 @@ export const getSpecies = (url) => {
     } else {
       return response.json();
     }
-  });
+  })
 }
 
 export const getCategories = () => {
   const categoryUrls = [
-    'https://swapi.co/api/people'
+    'https://swapi.co/api/people',
+    'https://swapi.co/api/planets',
+    'https://swapi.co/api/vehicles'
   ];
   const unresolvedPromises = categoryUrls.map(url => {
     return fetch(url)

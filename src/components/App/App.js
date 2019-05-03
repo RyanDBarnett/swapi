@@ -12,6 +12,7 @@ class App extends Component {
       loaded: false,
       films: [],
       people: [],
+      planets: [],
       error: ''
     };
   }
@@ -20,25 +21,40 @@ class App extends Component {
     getFilms()
     .then(films => this.setState({ films, loaded: true }))
     .catch(error => this.setState({ error: error, loaded: true }))
+    
     let result = getCategories().then(promises => { 
-      return promises[0].results.map(person => {
-        const {homeworld, name, species} = person;
-        const newPerson = {name}
+      let people = promises[0].results;
+      let planets = promises[1].results;
+      let vehicles = promises[2].results;
+      
+      people = people.map(person => {
+        return this.createNewPerson(person)
+      })
 
-        getHomeworld(homeworld)
-        .then(planet => {
-          newPerson.homeworld = planet.name;
-          newPerson.homeworldPopulation = planet.population;
-        });
-
-        getSpecies(species)
-        .then(species => {
-          newPerson.species = species.name
-        });
-        return newPerson;
-      });
+      planets = planets.map(planet => {
+        return this.createNewPlanet(planet)
+      })
+      
+      this.setState({ people, planets })
     });
-    result.then(people => this.setState({ people }));
+  }
+
+  createNewPlanet(planet) {
+    let {climate, name, terrain, population, residents} = planet;
+    residents = residents.length
+    return {climate, name, terrain, population, residents};
+  }
+
+  createNewPerson(person) {
+    const {homeworld, name, species} = person;
+    const newPerson = {name};
+    const unresolvedPromises = [getHomeworld(homeworld), getSpecies(species)];
+    Promise.all(unresolvedPromises).then(results => {
+      newPerson.homeworld = results[0].name;
+      newPerson.homeworldPopulation = results[0].population;
+      newPerson.species = results[1].name;
+    });
+    return newPerson;
   }
 
   render = () => {
