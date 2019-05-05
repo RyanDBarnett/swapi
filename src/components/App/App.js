@@ -27,7 +27,7 @@ class App extends Component {
   }
 
   componentDidMount = () => {
-    if(localStorage) {
+    if(localStorage.getItem('state')) {
       const state = this.getLocalStorage();
       this.setState({...state});
       return;
