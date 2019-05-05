@@ -22,7 +22,16 @@ class App extends Component {
     };
   }
 
+  componentDidUpdate = () => {
+    this.setLocalStorage()
+  }
+
   componentDidMount = () => {
+    if(localStorage) {
+      const state = this.getLocalStorage();
+      this.setState({...state});
+      return;
+    }
     const randomFilmNum = Math.floor(Math.random() * 1 + 1);
     fetchData(`https://swapi.co/api/films/${randomFilmNum}`)
     .then(film => this.setState({ film, loaded: true }))
@@ -48,6 +57,7 @@ class App extends Component {
       
       Promise.all(people).then(people => {
         this.setState({ people, planets, vehicles })
+        this.setLocalStorage()
       })
     })
   }
@@ -89,6 +99,15 @@ class App extends Component {
       Class: vehicle_class,
       "Passenger Capacity": passengers 
     }
+  }
+
+  getLocalStorage() {
+    return JSON.parse(localStorage.getItem('state'));
+  }
+
+  setLocalStorage() {
+    const state = JSON.stringify(this.state);
+    localStorage.setItem('state', state);
   }
 
   changeCategory = (e) => {
