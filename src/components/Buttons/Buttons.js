@@ -1,12 +1,15 @@
 import React from 'react';
+import './_Buttons.scss';
 
-const Buttons = () => {
+const Buttons = ({changeCategory, totalFavorites}) => {
   return (
-    <section>
-      <button>People</button>
-      <button>Planets</button>
-      <button>Vehicles</button><br/>
-      <button>View Favorites</button>
+    <section className="Buttons">
+      <div className="categories">
+        <button name="people" onClick={(e) => changeCategory(e)}>People</button>
+        <button name="planets" onClick={(e) => changeCategory(e)}>Planets</button>
+        <button name="vehicles" onClick={(e) => changeCategory(e)}>Vehicles</button>
+      </div>
+      <button name="favorites" onClick={(e) => changeCategory(e)}>View Favorites {totalFavorites}</button>
     </section>
   )
 }

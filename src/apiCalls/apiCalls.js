@@ -1,17 +1,7 @@
-export const getHomeworld = (url) => {
+export const fetchData = (url) => {
   return fetch(url).then(response => {
     if(!response.ok) {
-      throw Error('Oh fork');
-    } else {
-      return response.json();
-    }
-  })
-}
-
-export const getSpecies = (url) => {
-  return fetch(url).then(response => {
-    if(!response.ok) {
-      throw Error('Oh fudge');
+      throw Error(`Error fetching data from ${response.url}`);
     } else {
       return response.json();
     }
@@ -25,31 +15,7 @@ export const getCategories = () => {
     'https://swapi.co/api/vehicles'
   ];
   const unresolvedPromises = categoryUrls.map(url => {
-    return fetch(url)
-    .then(response => {
-      if(!response.ok) {
-        throw Error('bummer');
-      } else {
-        return response.json();
-      }
-    });
+    return fetchData(url)
   });
   return Promise.all(unresolvedPromises);
-}
-
-export const getFilms = () => {
-  const url = 'https://swapi.co/api/films';
-  return fetch(url)
-  .then(response => response.json())
-  .then(data => {
-    const films = data.results.map(film => {
-      const {title, opening_crawl, release_date} = film;
-      const newFilm = {title, opening_crawl, release_date};
-      return newFilm;
-    });
-    return films;
-  })
-  .catch(error => {
-    console.log('Argh', error);
-  })
 }
