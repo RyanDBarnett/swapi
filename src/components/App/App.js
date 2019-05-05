@@ -30,47 +30,25 @@ class App extends Component {
     
     getCategories()
     .then(categories => { 
-      // let people = categories[0].results;
-      // let planets = categories[1].results;
-      // let vehicles = categories[2].results;
-      // categories = {
-      //   people: categories[0].results,
-      //   planets: categories[1].results,
-      //   vehicles: categories[2].results
-      // }
-      console.log(categories)
-      categories.forEach((cat, index) => {
-        const unresolvedPromises = cat.map(element => {
-          if (index === 0) {
-            return this.createPerson(element);
-          } else if (index === 1) {
-            return this.createPlanet(element);
-          } else {
-            return this.createVehicle(element);
-          }
-        });
-        Promise.all(unresolvedPromises)
-        .then(result => {
-          let key = index === 0 ? 'people' : index === 1 ? 'planets' : 'vehicles' 
-          this.setState({[key]: result})
-        })
+      let people = categories[0].results;
+      let planets = categories[1].results;
+      let vehicles = categories[2].results;
+      
+      people = people.map(person => {
+        return this.createPerson(person);
+      })
+
+      planets = planets.map(planet => {
+        return this.createPlanet(planet)
+      })
+
+      vehicles = vehicles.map(vehicle => {
+        return this.createVehicle(vehicle);
       })
       
-      // people = people.map(person => {
-      //   return this.createPerson(person);
-      // })
-
-      // planets = planets.map(planet => {
-      //   return this.createPlanet(planet)
-      // })
-
-      // vehicles = vehicles.map(vehicle => {
-      //   return this.createVehicle(vehicle);
-      // })
-      
-      // Promise.all(people).then(people => {
-      //   this.setState({ people, planets, vehicles })
-      // })
+      Promise.all(people).then(people => {
+        this.setState({ people, planets, vehicles })
+      })
     })
   }
 
