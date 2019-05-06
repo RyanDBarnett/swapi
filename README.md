@@ -13,9 +13,13 @@ In order to install and run this app on your local machine type the following in
 
 ### Screenshots
 
+#### Wire Frame
+
 ![image of wireframe](./src/media/swapi-wireframe.jpeg)
 
-![image of end screen](./src/media/aria-app-end-screenshot.png)
+#### Finsihed App
+
+![image of app](./src/media/swapi-screenshot.png)
 
 ### Learning Goals
 
