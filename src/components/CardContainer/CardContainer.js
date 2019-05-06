@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from '../Card/Card';
 import './_CardContainer.scss';
+import PropTypes from 'prop-types';
 
 const CardContainer = ({items, favorites, addFavorite, removeFavorite, currentDisplay}) => {
   let cards = items.map((item, index) => {
@@ -27,6 +28,14 @@ const CardContainer = ({items, favorites, addFavorite, removeFavorite, currentDi
       </div>
     </div>
   )
+}
+
+CardContainer.propTypes = {
+  addFavorite: PropTypes.func,
+  removeFavorite: PropTypes.func,
+  items: PropTypes.array,
+  favorites: PropTypes.array,
+  currentDisplay: PropTypes.string
 }
 
 export default CardContainer;
