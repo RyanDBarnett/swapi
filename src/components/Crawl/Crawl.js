@@ -1,5 +1,6 @@
 import React from 'react';
 import './_Crawl.scss';
+import PropTypes from 'prop-types';
 
 const Crawl = ({film}) => {
   const {title, opening_crawl, release_date} = film;
@@ -10,6 +11,10 @@ const Crawl = ({film}) => {
       <h3>Film Released: {release_date}</h3>
     </div>
   )
+}
+
+Crawl.propTypes = {
+  film: PropTypes.object
 }
 
 export default Crawl;
