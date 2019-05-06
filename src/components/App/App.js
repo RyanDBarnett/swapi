@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import Buttons from '../Buttons/Buttons';
 import CardContainer from '../CardContainer/CardContainer';
 import Crawl from '../Crawl/Crawl';
 import Header from '../Header/Header';
@@ -152,10 +151,9 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Header />
-        <Buttons 
-          totalFavorites={this.state.favorites.length} 
-          changeCategory={this.changeCategory} 
+        <Header 
+          totalFavorites={this.state.favorites.length}
+          changeCategory={this.changeCategory}
         />
         {mainContent}
         <h1>{error}</h1>
