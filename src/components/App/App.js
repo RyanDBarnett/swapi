@@ -43,16 +43,16 @@ class App extends Component {
       let planets = categories[1].results;
       let vehicles = categories[2].results;
       
-      people = people.map(person => {
-        return this.createPerson(person);
+      people = people.map((person, index) => {
+        return this.createPerson(person, index);
       })
 
-      planets = planets.map(planet => {
-        return this.createPlanet(planet)
+      planets = planets.map((planet, index) => {
+        return this.createPlanet(planet, index)
       })
 
-      vehicles = vehicles.map(vehicle => {
-        return this.createVehicle(vehicle);
+      vehicles = vehicles.map((vehicle, index) => {
+        return this.createVehicle(vehicle, index);
       })
       
       Promise.all(people).then(people => {
@@ -62,12 +62,12 @@ class App extends Component {
     })
   }
 
-  createPlanet(planet) {
+  createPlanet(planet, index) {
     let {climate, name, terrain, population, residents} = planet;
     residents = residents.length;
     return {
       Name: name,
-      id: Date.now() + 2000,
+      id: Date.now() + 2000 + index,
       Climate: climate,
       Terrain: terrain,
       Population: population,
@@ -75,11 +75,11 @@ class App extends Component {
     };
   }
 
-  createPerson(person) {
+  createPerson(person, index) {
     const {homeworld, name, species} = person;
     const newPerson = {
       Name: name,
-      id: Date.now() + 4000
+      id: Date.now() + 4000 + index
     };
     const pendingPromises = [fetchData(homeworld), fetchData(species)];
     return Promise.all(pendingPromises).then(results => {
@@ -90,11 +90,11 @@ class App extends Component {
     })
   }
 
-  createVehicle(vehicle) {
+  createVehicle(vehicle, index) {
     const {name, model, vehicle_class, passengers} = vehicle;
     return {
       Name: name,
-      id: Date.now() + 6000,
+      id: Date.now() + 6000 + index,
       Model: model,
       Class: vehicle_class,
       "Passenger Capacity": passengers 
@@ -115,6 +115,9 @@ class App extends Component {
   }
 
   addFavorite = (id) => {
+    if(this.state.favorites.find(fav => fav.id === id)) {
+      return;
+    }
     const {people, planets, vehicles} = this.state;
     const allData = [...people, ...planets, ...vehicles];
     const newFavorite = allData.find(element => {
@@ -141,7 +144,8 @@ class App extends Component {
         mainContent = <CardContainer 
           addFavorite={this.addFavorite}
           removeFavorite={this.removeFavorite} 
-          items={this.state[currentDisplay]} 
+          items={this.state[currentDisplay]}
+          favorites={this.state.favorites} 
         />
       }
     }

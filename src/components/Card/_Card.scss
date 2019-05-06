@@ -2,4 +2,11 @@
   background-color: beige;
   padding: 20px;
   margin: 20px;
+  border: 2px solid transparent;
+  width: 20%;
+  box-sizing: border-box;
+}
+
+.favorited {
+  border: 2px solid blue;
 }
