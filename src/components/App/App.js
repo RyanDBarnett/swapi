@@ -3,6 +3,7 @@ import './_App.scss';
 import CardContainer from '../CardContainer/CardContainer';
 import Crawl from '../Crawl/Crawl';
 import Header from '../Header/Header';
+import PropTypes from 'prop-types';
 import { fetchData, getCategories } from '../../apiCalls/apiCalls.js';
 import { 
   createPeople,
@@ -112,6 +113,17 @@ class App extends Component {
       </div>
     );
   }
+}
+
+App.propTypes = {
+  loaded: PropTypes.bool,
+  currentDisplay: PropTypes.string,
+  film: PropTypes.object,
+  people: PropTypes.array,
+  planets: PropTypes.array,
+  vehicles: PropTypes.array,
+  favorites: PropTypes.array,
+  error: PropTypes.string
 }
 
 export default App;

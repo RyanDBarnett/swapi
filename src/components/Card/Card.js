@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './_Card.scss';
+import PropTypes from 'prop-types';
 
 class Card extends Component {
   constructor() {
@@ -42,6 +43,10 @@ class Card extends Component {
       </article>
     )
   }
+}
+
+Card.propTypes = {
+  favorited: PropTypes.bool
 }
 
 export default Card;
