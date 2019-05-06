@@ -4,6 +4,13 @@ import CardContainer from '../CardContainer/CardContainer';
 import Crawl from '../Crawl/Crawl';
 import Header from '../Header/Header';
 import { fetchData, getCategories } from '../../apiCalls/apiCalls.js';
+import { 
+  createPeople,
+  createPlanets,
+  createVehicles,
+  getLocalStorage,
+  setLocalStorage
+} from './helperFunctions.js';
 
 class App extends Component {
   constructor() {
@@ -22,12 +29,12 @@ class App extends Component {
   }
 
   componentDidUpdate = () => {
-    this.setLocalStorage()
+    setLocalStorage(this.state)
   }
 
   componentDidMount = () => {
     if(localStorage.getItem('state')) {
-      const state = this.getLocalStorage();
+      const state = getLocalStorage();
       this.setState({...state});
       return;
     }
@@ -42,71 +49,15 @@ class App extends Component {
       let planets = categories[1].results;
       let vehicles = categories[2].results;
       
-      people = people.map((person, index) => {
-        return this.createPerson(person, index);
-      })
-
-      planets = planets.map((planet, index) => {
-        return this.createPlanet(planet, index)
-      })
-
-      vehicles = vehicles.map((vehicle, index) => {
-        return this.createVehicle(vehicle, index);
-      })
+      people = createPeople(people);
+      planets = createPlanets(planets);
+      vehicles = createVehicles(vehicles);
       
       Promise.all(people).then(people => {
         this.setState({ people, planets, vehicles })
-        this.setLocalStorage()
+        setLocalStorage(this.state)
       })
     })
-  }
-
-  createPlanet(planet, index) {
-    let {climate, name, terrain, population, residents} = planet;
-    residents = residents.length;
-    return {
-      Name: name,
-      id: Date.now() + 2000 + index,
-      Climate: climate,
-      Terrain: terrain,
-      Population: population,
-      Residents: residents
-    };
-  }
-
-  createPerson(person, index) {
-    const {homeworld, name, species} = person;
-    const newPerson = {
-      Name: name,
-      id: Date.now() + 4000 + index
-    };
-    const pendingPromises = [fetchData(homeworld), fetchData(species)];
-    return Promise.all(pendingPromises).then(results => {
-      newPerson.Species = results[1].name;
-      newPerson.Homeworld = results[0].name;
-      newPerson.HomeworldPopulation = results[0].population;
-      return newPerson;
-    })
-  }
-
-  createVehicle(vehicle, index) {
-    const {name, model, vehicle_class, passengers} = vehicle;
-    return {
-      Name: name,
-      id: Date.now() + 6000 + index,
-      Model: model,
-      Class: vehicle_class,
-      "Passenger Capacity": passengers 
-    }
-  }
-
-  getLocalStorage() {
-    return JSON.parse(localStorage.getItem('state'));
-  }
-
-  setLocalStorage() {
-    const state = JSON.stringify(this.state);
-    localStorage.setItem('state', state);
   }
 
   changeCategory = (e) => {
@@ -156,7 +107,6 @@ class App extends Component {
           changeCategory={this.changeCategory}
         />
         {mainContent}
-        <h1>{error}</h1>
       </div>
     );
   }
