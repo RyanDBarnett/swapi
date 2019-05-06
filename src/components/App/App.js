@@ -34,14 +34,12 @@ class App extends Component {
 
   componentDidMount = () => {
     if(localStorage.getItem('state')) {
-      const state = getLocalStorage();
-      this.setState({...state});
-      return;
+      return this.setState({...getLocalStorage()});
     }
     const randomFilmNum = Math.floor(Math.random() * 1 + 1);
     fetchData(`https://swapi.co/api/films/${randomFilmNum}`)
     .then(film => this.setState({ film, loaded: true }))
-    .catch(error => this.setState({ error }))
+    .catch(error => this.setState({ error: error.message }))
     
     getCategories()
     .then(categories => { 
@@ -89,15 +87,18 @@ class App extends Component {
     let mainContent = 'Loading...';
     if (loaded) {
       if (currentDisplay === 'crawl') {
-        mainContent = <Crawl film={film} />
+        mainContent = <Crawl film={film} />;
       } else {
         mainContent = <CardContainer 
           addFavorite={this.addFavorite}
           removeFavorite={this.removeFavorite} 
           items={this.state[currentDisplay]}
           favorites={this.state.favorites} 
-        />
+        />;
       }
+    }
+    if (error) {
+      mainContent = <h1>{error}</h1>;
     }
 
     return (
