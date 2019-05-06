@@ -1,12 +1,37 @@
 .Card {
-  background-color: beige;
+  background-color: black;
   padding: 20px;
   margin: 20px;
-  border: 2px solid transparent;
+  border: 3px solid rgba(255,213,78,.2);
+  border-radius: 3px;
   width: 20%;
   box-sizing: border-box;
+  color: #4bd5ee;
+
+  h4 {
+    margin: 0;
+    color: #ffd54e;
+    text-transform: uppercase;
+  }
+
+  button {
+    font-size: 18px;
+    padding: 10px 30px;
+    background: #ffd54e;
+    border: 3px solid #ffd54e;
+    border-radius: 3px;
+
+    &:hover {
+      cursor: pointer;
+      outline: #4bd5ee auto 5px
+    }
+
+    &:active {
+      background: #967f36;
+    }
+  }
 }
 
 .favorited {
-  border: 2px solid blue;
+  border-color: #ffd54e;
 }

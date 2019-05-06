@@ -50,7 +50,7 @@ function createPerson(person, index) {
   return Promise.all(pendingPromises).then(results => {
     newPerson.Species = results[1].name;
     newPerson.Homeworld = results[0].name;
-    newPerson.HomeworldPopulation = results[0].population;
+    newPerson.Population = results[0].population;
     return newPerson;
   })
 }

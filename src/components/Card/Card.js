@@ -22,20 +22,21 @@ class Card extends Component {
   }
 
   render() {
-    const favorited = this.state.favorited ? "favorited" : ""
+    const favorited = this.state.favorited ? 'favorited' : '';
+    const favBtnText = this.state.favorited ? 'Unfavorite' : 'Favorite';
     const cardData = Object.keys(this.props).map((key, index) => {
       const ifKeyAllowed = 
         key !== 'id' && 
         key !== 'addFavorite' &&
         key !== 'removeFavorite' &&
         key !== 'favorited';
-      return ifKeyAllowed && <p key={index}>{key}<br/> {this.props[key]}</p>;
+      return ifKeyAllowed && <div><h4 key={index}>{key}</h4><p> {this.props[key]}</p></div>;
     });
     
     return (
       <article className={"Card " + favorited}>
         {cardData}
-        <button onClick={this.handleClick}>Favorite</button>  
+        <button onClick={this.handleClick}>{favBtnText}</button>  
       </article>
     )
   }

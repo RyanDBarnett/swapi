@@ -93,7 +93,8 @@ class App extends Component {
           addFavorite={this.addFavorite}
           removeFavorite={this.removeFavorite} 
           items={this.state[currentDisplay]}
-          favorites={this.state.favorites} 
+          favorites={this.state.favorites}
+          currentDisplay={currentDisplay}
         />;
       }
     }
