@@ -2,6 +2,7 @@
   "name": "swapi",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://ryandbarnett.github.io/swapi/",
   "dependencies": {
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
