@@ -3,6 +3,17 @@
   min-height: 600px;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: flex-start;
+
+  h2 {
+    color: #ffd54e;
+    text-transform: uppercase;
+    background-color: black;
+    width: 20%;
+    padding: 10px;
+    margin: 20px auto;
+    border: 3px solid #ffd54e;
+  }
 }
 
 .currentDisplay {

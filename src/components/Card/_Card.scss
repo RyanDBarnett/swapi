@@ -13,23 +13,6 @@
     color: #ffd54e;
     text-transform: uppercase;
   }
-
-  button {
-    font-size: 18px;
-    padding: 10px 30px;
-    background: #ffd54e;
-    border: 3px solid #ffd54e;
-    border-radius: 3px;
-
-    &:hover {
-      cursor: pointer;
-      outline: #4bd5ee auto 5px
-    }
-
-    &:active {
-      background: #967f36;
-    }
-  }
 }
 
 .favorited {

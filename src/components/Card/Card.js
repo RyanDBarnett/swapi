@@ -24,7 +24,9 @@ class Card extends Component {
   render() {
     const favorited = this.state.favorited ? 'favorited' : '';
     const favBtnText = this.state.favorited ? 'Unfavorite' : 'Favorite';
-    const cardData = Object.keys(this.props).map((key, index) => {
+    let index = 0;
+    const cardData = Object.keys(this.props).map((key) => {
+      index += 1;
       const ifKeyAllowed = 
         key !== 'id' && 
         key !== 'addFavorite' &&

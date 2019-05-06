@@ -1,12 +1,13 @@
 import React from 'react';
+import './_Crawl.scss';
 
 const Crawl = ({film}) => {
   const {title, opening_crawl, release_date} = film;
   return (
-    <div>
+    <div className="Crawl">
       <h2>{title}</h2>
       <h3>{opening_crawl}</h3>
-      <p>{release_date}</p>
+      <h3>Film Released: {release_date}</h3>
     </div>
   )
 }
