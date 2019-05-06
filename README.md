@@ -2,6 +2,8 @@
 
 This project was built to allow users to search through and favorite their favorite Star Wars characters, planets, and vehicles. 
 
+[Visit Live App](https://ryandbarnett.github.io/swapi/)
+
 ### Installation
 
 In order to install and run this app on your local machine type the following in your terminal:
