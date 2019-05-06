@@ -1,6 +1,7 @@
 import React from 'react';
 import Buttons from '../Buttons/Buttons';
 import './_Header.scss'
+import PropTypes from 'prop-types';
 
 const Header = ({totalFavorites, changeCategory}) => {
   return (
@@ -12,6 +13,11 @@ const Header = ({totalFavorites, changeCategory}) => {
       />
     </header>
   )
+}
+
+Header.propTypes = {
+  totalFavorites: PropTypes.number,
+  changeCategory: PropTypes.func
 }
 
 export default Header;
