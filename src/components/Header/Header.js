@@ -1,9 +1,10 @@
 import React from 'react';
 import Buttons from '../Buttons/Buttons';
+import './_Header.scss'
 
 const Header = ({totalFavorites, changeCategory}) => {
   return (
-    <header>
+    <header className='Header'>
       <h1>SWAPI-Box</h1>
       <Buttons 
         totalFavorites={totalFavorites} 
