@@ -24,10 +24,14 @@ class Card extends Component {
   render() {
     const favorited = this.state.favorited ? "favorited" : ""
     const cardData = Object.keys(this.props).map((key, index) => {
-      const ifKeyAllowed = key !== 'id' && key !== 'addFavorite' && key !== 'removeFavorite';
+      const ifKeyAllowed = 
+        key !== 'id' && 
+        key !== 'addFavorite' &&
+        key !== 'removeFavorite' &&
+        key !== 'favorited';
       return ifKeyAllowed && <p key={index}>{key}<br/> {this.props[key]}</p>;
     });
-
+    
     return (
       <article className={"Card " + favorited}>
         {cardData}

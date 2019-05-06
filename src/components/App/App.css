@@ -1,3 +1,5 @@
 .App {
+  background: url("../../media/star-background.jpg");
+  background-size: 40%;
   text-align: center;
 }
