@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './_Card.scss';
 import PropTypes from 'prop-types';
 
+const uuid = require("uuid");
+
 class Card extends Component {
   constructor() {
     super();
@@ -22,10 +24,11 @@ class Card extends Component {
     this.setState({ favorited });
   }
 
+
   render() {
     const favorited = this.state.favorited ? 'favorited' : '';
     const favBtnText = this.state.favorited ? 'Unfavorite' : 'Favorite';
-    let index = 0;
+    let index = 1;
     const cardData = Object.keys(this.props).map((key) => {
       index += 1;
       const ifKeyAllowed = 
@@ -33,7 +36,7 @@ class Card extends Component {
         key !== 'addFavorite' &&
         key !== 'removeFavorite' &&
         key !== 'favorited';
-      return ifKeyAllowed && <div><h4 key={index}>{key}</h4><p> {this.props[key]}</p></div>;
+      return ifKeyAllowed && <div><h4 key={uuid()}>{key}</h4><p> {this.props[key]}</p></div>;
     });
     
     return (

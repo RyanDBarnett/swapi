@@ -3,6 +3,8 @@ import Card from '../Card/Card';
 import './_CardContainer.scss';
 import PropTypes from 'prop-types';
 
+const uuidv4 = require("uuid/v4");
+
 const CardContainer = ({items, favorites, addFavorite, removeFavorite, currentDisplay}) => {
   let cards = items.map((item, index) => {
     const favorited = !!favorites.find(fav => {
@@ -13,7 +15,7 @@ const CardContainer = ({items, favorites, addFavorite, removeFavorite, currentDi
       favorited={favorited} 
       addFavorite={addFavorite}
       removeFavorite={removeFavorite} 
-      key={item.id + index} />
+      key={uuidv4()} />
   });
 
   if(currentDisplay === 'favorites' && favorites.length === 0) {
