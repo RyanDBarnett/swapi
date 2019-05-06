@@ -27,9 +27,11 @@ export const mockVehicle = {
   Class: "wheeled",
   Model: "Digger Crawler",
   Name: "Sand Crawler",
-  Passenger Capacity: "30",
+  'Passenger Capacity': "30",
   id: 1557118671153
 }
+
+export const mockEvent = {target: {name: 'planets'}}
 
 export const mockPeople = [
   mockPerson, mockPerson2
