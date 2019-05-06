@@ -1,5 +1,6 @@
 import React from 'react';
 import './_Buttons.scss';
+import PropTypes from 'prop-types';
 
 const Buttons = ({changeCategory, totalFavorites}) => {
   return (
@@ -10,6 +11,11 @@ const Buttons = ({changeCategory, totalFavorites}) => {
       <button name="favorites" onClick={(e) => changeCategory(e)}>View Favorites {totalFavorites}</button>
     </section>
   )
+}
+
+Buttons.propTypes = {
+  changeCategory: PropTypes.func,
+  totalFavorites: PropTypes.number
 }
 
 export default Buttons;
