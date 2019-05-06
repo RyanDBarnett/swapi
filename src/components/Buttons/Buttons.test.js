@@ -5,7 +5,7 @@ import {shallow} from 'enzyme';
 const mockTotalFavorites = 0;
 const mockChangeCategory = jest.fn();
 
-describe('App', () => {
+describe('Buttons', () => {
   let wrapper;
 
   beforeEach( () => {
