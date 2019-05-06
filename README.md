@@ -17,7 +17,7 @@ In order to install and run this app on your local machine type the following in
 
 ![image of wireframe](./src/media/swapi-wireframe.jpeg)
 
-#### Finsihed App
+#### Finished App
 
 ![image of app](./src/media/swapi-screenshot.png)
 
